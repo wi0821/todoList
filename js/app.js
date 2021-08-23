@@ -1,11 +1,3 @@
-//目錄CSS active樣式toggle
-$(document).ready(function () {
-    $('.tab li').on('click', function() {
-        $('.tab li').removeClass('active');
-        $(this).addClass('active');
-        });
-});
-
 const list = document.querySelector(".list");
 const listNum = document.querySelector(".list_footer p");
 const listAddInput = document.querySelector(".input input");
@@ -15,17 +7,21 @@ const btnRemove = document.querySelector(".list_footer a");
 
 let todoList = [
     {
-        note:"把冰箱發霉的檸檬拿去丟",
-        checked: ""
-    },
-    {
-        note:"整理電腦資料夾",
-        checked: ""
-    },
-    {
-        note:"跟西西談個戀愛",
+        note:"機車換機油",
         checked: "checked"
     },
+    {
+        note:"去超市買義大利麵",
+        checked: ""
+    },
+    {
+        note:"去7-11寄快遞",
+        checked: "checked"
+    },
+    {
+        note:"繳這個月的電話費",
+        checked: ""
+    }
 ]
 
 //重整資料函式
@@ -66,6 +62,12 @@ const filterData = checked => {
     list.innerHTML= str;
 }
 
+//目錄CSS active樣式toggle函式
+const activeToggle = () => {
+    $(this).addClass('active');
+    $('.tab li').removeClass('active');
+}
+
 refreshData();
 
 // 新增代辦事項
@@ -104,13 +106,19 @@ filter.addEventListener("click", e => {
     }
     e.preventDefault();
 
+
     if (e.target.className == "todo") {
+        activeToggle();
         filterData("");
       } else if (e.target.className == "finished") {
-        filterData("checked");
+            activeToggle();
+            filterData("checked");
       } else {
-          refreshData();
+            activeToggle();
+            refreshData();
       }
+
+
 })
 
 btnRemove.addEventListener("click", e => {
